@@ -17,7 +17,10 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
       "The moment staged becomes live. effectiveAt() on-chain, or the issuer's process date at 09:30 ET when no time is published; that time is assumed.",
   },
   { term: "veiled", plain: "A ticker with a pending action and terminus still ahead." },
-  { term: "due", plain: "Process date passed. No multiplier move read yet. The desk will not guess." },
+  {
+    term: "due",
+    plain: "Process date passed. No multiplier move read yet. The desk will not guess.",
+  },
   {
     term: "oracle",
     plain: "The token's price-feed pause flag, oraclePaused(). Paused means no on-chain price.",

@@ -73,7 +73,10 @@ export function VeilList({ row }: { row: TickerRow }) {
 
 function Mark({ ok }: { ok: boolean | null }) {
   const glyph = ok === true ? "yes" : ok === false ? "no" : "—";
-  const color =
-    ok === true ? "text-accent" : ok === false ? "text-ink-subtle" : "text-ink-muted";
-  return <span className={`w-8 shrink-0 font-mono text-xs uppercase tracking-widest ${color}`}>{glyph}</span>;
+  const color = ok === true ? "text-accent" : ok === false ? "text-ink-subtle" : "text-ink-muted";
+  return (
+    <span className={`w-8 shrink-0 font-mono text-xs uppercase tracking-widest ${color}`}>
+      {glyph}
+    </span>
+  );
 }

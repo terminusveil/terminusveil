@@ -43,7 +43,10 @@ export function resolveState(input: {
 }
 
 export function emptyCopy(
-  row: Pick<TickerRow, "ticker" | "state" | "live" | "staged" | "action" | "effectiveAtIso" | "lastMove">,
+  row: Pick<
+    TickerRow,
+    "ticker" | "state" | "live" | "staged" | "action" | "effectiveAtIso" | "lastMove"
+  >,
   now = Date.now(),
 ): string {
   const live = formatMultiplier(row.live);
@@ -72,12 +75,18 @@ export function emptyCopy(
 }
 
 export function actionLine(action: CorporateAction): string {
-  const kind = action.type.replace(/^CORPORATE_ACTION_TYPE_/, "").replaceAll("_", " ").toLowerCase();
+  const kind = action.type
+    .replace(/^CORPORATE_ACTION_TYPE_/, "")
+    .replaceAll("_", " ")
+    .toLowerCase();
   // A cash dividend is pending on the issuer's tape; the desk has no evidence of payment either way.
   if (isCashDividend(action.type)) {
-    return action.rate ? `Cash dividend ${formatCashRate(action.rate)} pending.` : "Cash dividend pending.";
+    return action.rate
+      ? `Cash dividend ${formatCashRate(action.rate)} pending.`
+      : "Cash dividend pending.";
   }
   if (action.rate) return `Cash dividend ${formatCashRate(action.rate)} staged.`;
-  if (action.oldRate && action.newRate) return `Split ${action.oldRate} → ${action.newRate} staged.`;
+  if (action.oldRate && action.newRate)
+    return `Split ${action.oldRate} → ${action.newRate} staged.`;
   return `${kind} staged.`;
 }

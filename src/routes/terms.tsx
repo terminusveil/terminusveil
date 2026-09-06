@@ -38,16 +38,15 @@ function Terms() {
           </p>
           <p>
             When a source does not answer, the desk serves its last committed reading, captioned
-            with its read time and block, and writes absent where that reading has nothing. It
-            never guesses a figure.
+            with its read time and block, and writes absent where that reading has nothing. It never
+            guesses a figure.
           </p>
           <p>
             {HOUSE.display} is an access token for Terminus Veil's holder features. It is not a
-            share, not equity, not a claim on fees or revenue, and carries no vote.{" "}
-            {HOUSE.display} is created on{" "}
-            <Ext href={HOUSE.launchpad.url}>{HOUSE.launchpad.name}</Ext> {HOUSE.launchpad.version}.
-            Its price is set by a public curve, then a public pool, that the house does not
-            control. Nothing on this site is an offer, a solicitation, or advice.
+            share, not equity, not a claim on fees or revenue, and carries no vote. {HOUSE.display}{" "}
+            is created on <Ext href={HOUSE.launchpad.url}>{HOUSE.launchpad.name}</Ext>{" "}
+            {HOUSE.launchpad.version}. Its price is set by a public curve, then a public pool, that
+            the house does not control. Nothing on this site is an offer, a solicitation, or advice.
           </p>
           <p>
             Trading {HOUSE.display} happens on {HOUSE.launchpad.name} under {HOUSE.launchpad.name}

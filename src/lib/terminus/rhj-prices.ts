@@ -74,7 +74,9 @@ export function createPriceFeed(
       });
       if (res.status === 429) {
         const t = clock();
-        warnOnce(rateLimitGate, PRICE_BACKOFF_MS, t, "[rhj-prices] 429, backing off 60s", { ticker });
+        warnOnce(rateLimitGate, PRICE_BACKOFF_MS, t, "[rhj-prices] 429, backing off 60s", {
+          ticker,
+        });
         backoffUntil = t + PRICE_BACKOFF_MS;
         return parseQuote(ticker, null);
       }

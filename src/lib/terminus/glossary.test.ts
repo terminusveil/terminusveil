@@ -27,7 +27,10 @@ describe("glossary", () => {
       plain("terminus"),
       "The moment staged becomes live. effectiveAt() on-chain, or the issuer's process date at 09:30 ET when no time is published; that time is assumed.",
     );
-    assert.equal(plain("due"), "Process date passed. No multiplier move read yet. The desk will not guess.");
+    assert.equal(
+      plain("due"),
+      "Process date passed. No multiplier move read yet. The desk will not guess.",
+    );
     // Character classes keep the repo's banned-word grep over src empty; the assertion is real.
     for (const g of GLOSSARY) assert.doesNotMatch(g.plain, /has not m[o]ved|un[p]aid/i, g.term);
   });

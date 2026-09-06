@@ -31,7 +31,10 @@ export function SiteNav() {
     <header className="site-nav sticky top-0 z-20 border-b border-line bg-paper/90 backdrop-blur-md">
       <div className="wrap flex items-center gap-3 py-2.5">
         <Wordmark drawn />
-        <nav aria-label="Site" className="ml-auto hidden items-center gap-7 text-sm text-ink-muted lg:flex">
+        <nav
+          aria-label="Site"
+          className="ml-auto hidden items-center gap-7 text-sm text-ink-muted lg:flex"
+        >
           {LINKS.map((l) => (
             <Link
               key={l.to}

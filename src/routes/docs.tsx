@@ -249,16 +249,15 @@ function Docs() {
                 the Uniswap v4 PoolManager
               </h3>
               <DocP>
-                Windows. For a veiled ticker the desk lists the {HOUSE.launchpad.name} launches
-                that named it as their pair asset, the token they trade against, and counts the
-                Uniswap v4 pools that hold it. Launches come from the
-                Factory's <Code>TokenLaunched</Code> events at <Code>{PONS_FACTORY}</Code>; pools
-                from the PoolManager's <Code>Initialize</Code> events at{" "}
-                <Code>{UNISWAP_V4_POOL_MANAGER}</Code>, classed by hook: pons's own hook, none, or
-                another protocol's. The history is a committed index, dated on the page with the
-                block it reaches; a refresh reads a bounded stretch past it, never the whole gap,
-                so that block is the edge of what is listed. Counts, names and links only: no
-                prices, no liquidity, no swap links.
+                Windows. For a veiled ticker the desk lists the {HOUSE.launchpad.name} launches that
+                named it as their pair asset, the token they trade against, and counts the Uniswap
+                v4 pools that hold it. Launches come from the Factory's <Code>TokenLaunched</Code>{" "}
+                events at <Code>{PONS_FACTORY}</Code>; pools from the PoolManager's{" "}
+                <Code>Initialize</Code> events at <Code>{UNISWAP_V4_POOL_MANAGER}</Code>, classed by
+                hook: pons's own hook, none, or another protocol's. The history is a committed
+                index, dated on the page with the block it reaches; a refresh reads a bounded
+                stretch past it, never the whole gap, so that block is the edge of what is listed.
+                Counts, names and links only: no prices, no liquidity, no swap links.
               </DocP>
               <h3 className="mt-6 font-sans text-sm font-semibold text-ink">How often</h3>
               <dl className="panel mt-3 divide-y divide-line px-4 font-mono text-sm">

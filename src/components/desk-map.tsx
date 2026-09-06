@@ -36,27 +36,26 @@ export function DeskMap() {
     <Reveal>
       <section className="border-t border-line">
         <div className="wrap relative py-16 lg:py-24">
-      <Mark className="pointer-events-none absolute -right-8 top-4 hidden w-72 opacity-[0.18] lg:block" />
-      <h2 className="max-w-xl font-display text-2xl leading-snug tracking-tight text-ink">
-        A reading window around the tape. Not a marketplace.
-      </h2>
-      <ol className="mt-10 grid gap-3 sm:grid-cols-2">
-        {MAP.map((item) => (
-          <li key={item.to}>
-            <Link
-              to={item.to}
-              className="panel panel-lift flex h-full flex-col p-6 sm:p-7"
-            >
-              <p className="font-sans text-lg font-semibold tracking-tight text-ink">
-                {item.title}
-              </p>
-              <p className="mt-2 text-sm leading-relaxed text-pretty text-ink-muted">{item.body}</p>
-            </Link>
-          </li>
-        ))}
-      </ol>
+          <Mark className="pointer-events-none absolute -right-8 top-4 hidden w-72 opacity-[0.18] lg:block" />
+          <h2 className="max-w-xl font-display text-2xl leading-snug tracking-tight text-ink">
+            A reading window around the tape. Not a marketplace.
+          </h2>
+          <ol className="mt-10 grid gap-3 sm:grid-cols-2">
+            {MAP.map((item) => (
+              <li key={item.to}>
+                <Link to={item.to} className="panel panel-lift flex h-full flex-col p-6 sm:p-7">
+                  <p className="font-sans text-lg font-semibold tracking-tight text-ink">
+                    {item.title}
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-pretty text-ink-muted">
+                    {item.body}
+                  </p>
+                </Link>
+              </li>
+            ))}
+          </ol>
         </div>
-    </section>
+      </section>
     </Reveal>
   );
 }

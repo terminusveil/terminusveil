@@ -1,12 +1,12 @@
 # Fonts
 
-The site ships three font families under the SIL Open Font License, Version 1.1. The license text follows; it applies to every font file under `public/fonts/`.
+The site ships three font families under the SIL Open Font License, Version 1.1. The files are Latin subsets of the originals, so they are Modified Versions under the OFL and carry no Reserved Font Name as their own. The license text follows; it applies to every font file under `public/fonts/`.
 
 | Family | Files | Copyright |
 |---|---|---|
 | Fraunces | `fraunces-600.woff2`, `fraunces-italic-500.woff2` | Copyright 2020 The Fraunces Project Authors (github.com/undercasetype/Fraunces) |
 | Plus Jakarta Sans | `jakarta-400.woff2`, `jakarta-500.woff2`, `jakarta-600.woff2` | Copyright 2020 The Plus Jakarta Sans Project Authors (github.com/tokotype/PlusJakartaSans) |
-| IBM Plex Sans | `plex-500.woff2` | Copyright © 2017 IBM Corp. (github.com/IBM/plex) |
+| IBM Plex Mono | `plex-500.woff2` | Copyright © 2017 IBM Corp. with Reserved Font Name "Plex" (github.com/IBM/plex) |
 
 ---
 

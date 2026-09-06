@@ -22,7 +22,7 @@ Every stock token on Robinhood Chain carries a multiplier. A split or a reinvest
 | `oraclePaused()` | `0x7706ba52` | oracle |
 | `paused()` | `0x5c975abb` | transfers |
 
-The issuer's pending actions come from Robinhood's public corporate-actions feed and are grouped by process date. When the feed names no time, the plate says `assumed`. Every figure links to the explorer.
+The site calls the first four "four reads"; `paused()` is the transfer pause printed beside them. The issuer's pending actions come from Robinhood's public corporate-actions feed and are grouped by process date. When the feed names no time, the plate says `assumed`. Every figure links to the explorer.
 
 ## Phases
 
@@ -43,7 +43,7 @@ $VEIL is not launched. Its address appears on `/token` first, then on X. Anythin
 
 ## Public reads
 
-`/api/health`, `/api/pending`, `/api/ticker/{ticker}`, `/api/tape`, `/api/calendar` (ICS), `/api/openapi.json`. No key, no limit beyond the edge cache.
+`/api/health`, `/api/pending`, `/api/ticker/{ticker}`, `/api/desk` (the whole desk as the pages receive it), `/api/tape`, `/api/calendar` (ICS), `/api/openapi.json`. No key, no limit beyond the edge cache.
 
 ## Run it
 
@@ -54,7 +54,7 @@ npm ci
 npm run dev
 ```
 
-`.env.example` lists the variables. Without `TERMINUS_RPC_URL` the desk reads the public RPC. `WIRE_POSTER_KEY` is only for a poster job and never belongs in a file.
+`.env.example` lists the variables. `.env` is committed and carries only the public origin; do not copy the example over it. Put your own values in `.env.local`, which is ignored and read by the dev server and the build (`npm run windows` and `npm run snapshot` take `TERMINUS_RPC_URL` from the shell). Without `TERMINUS_RPC_URL` the desk reads the public RPC. `WIRE_POSTER_KEY` is only for the poster job and never belongs in a file.
 
 ```bash
 npm test

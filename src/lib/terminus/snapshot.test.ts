@@ -16,13 +16,18 @@ describe("snapshot", () => {
     assert.equal(snapshotLastMoves(["0x0000000000000000000000000000000000000000"]).size, 0);
     assert.equal(snapshotLastMoves([]).size, 0);
     const rhj = snapshotRhj();
-    const addresses = rhj.assets.map((a) => a.address).filter((a): a is `0x${string}` => a !== null);
+    const addresses = rhj.assets
+      .map((a) => a.address)
+      .filter((a): a is `0x${string}` => a !== null);
     const moves = snapshotLastMoves(addresses);
     for (const [key, m] of moves) {
       assert.equal(key, key.toLowerCase());
       assert.equal(typeof m.oldWad, "bigint");
       assert.equal(typeof m.newWad, "bigint");
-      assert.ok(m.blockNumber > 0 && m.blockNumber <= SNAPSHOT.block, `${key} block ${m.blockNumber}`);
+      assert.ok(
+        m.blockNumber > 0 && m.blockNumber <= SNAPSHOT.block,
+        `${key} block ${m.blockNumber}`,
+      );
       assert.ok(m.effectiveAtSec > 0, `${key} effectiveAt`);
       assert.ok(m.blockTimeSec === null || m.blockTimeSec > 0, `${key} blockTime`);
     }
@@ -61,6 +66,7 @@ describe("snapshot", () => {
   });
   it("decodes transferPaused to a boolean or null for every committed contract", () => {
     const all = snapshotMultipliers(Object.keys(multipliersJson) as `0x${string}`[]);
-    for (const r of all.values()) assert.ok(r.transferPaused === null || typeof r.transferPaused === "boolean");
+    for (const r of all.values())
+      assert.ok(r.transferPaused === null || typeof r.transferPaused === "boolean");
   });
 });

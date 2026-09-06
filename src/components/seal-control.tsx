@@ -17,11 +17,7 @@ export function SealControl({ row, quiet = false }: { row: TickerRow; quiet?: bo
         <Link to="/cover" className="btn-ghost-sm">
           On the covering
         </Link>
-        <button
-          type="button"
-          className="btn-ghost-sm"
-          onClick={() => lift(row.ticker)}
-        >
+        <button type="button" className="btn-ghost-sm" onClick={() => lift(row.ticker)}>
           Lift
         </button>
       </span>

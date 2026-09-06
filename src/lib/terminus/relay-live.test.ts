@@ -260,7 +260,8 @@ const FIELD_SELECTORS = [
 
 /** A healthy token's answer per selector: 1× live and staged, a set terminus, oracle running, transfers paused. */
 function healthyAnswer(s: SubCallIn): Answer {
-  if (s.callData === SELECTORS.effectiveAt) return { success: true, returnData: `0x${word(EFFECTIVE_AT)}` };
+  if (s.callData === SELECTORS.effectiveAt)
+    return { success: true, returnData: `0x${word(EFFECTIVE_AT)}` };
   if (s.callData === SELECTORS.transferPaused) return { success: true, returnData: `0x${word(1)}` };
   if (s.callData === SELECTORS.oraclePaused) return { success: true, returnData: `0x${word(0)}` };
   return { success: true, returnData: `0x${word(WAD)}` };
@@ -329,7 +330,8 @@ describe("readMultipliers · through Multicall3", () => {
     globalThis.fetch = (async (_url: unknown, init?: { body?: string }) => {
       const batch = JSON.parse(init?.body ?? "[]") as RpcCall[];
       const out = batch.map((c) => {
-        if (c.id === 2) return { jsonrpc: "2.0", id: c.id, error: { message: "execution reverted" } };
+        if (c.id === 2)
+          return { jsonrpc: "2.0", id: c.id, error: { message: "execution reverted" } };
         const answers = subcallsOf(c).map((s) =>
           s.target.toLowerCase() === reverting && s.callData === SELECTORS.transferPaused
             ? { success: false, returnData: "0x" as const }
@@ -360,7 +362,8 @@ describe("readMultipliers · through Multicall3", () => {
   });
 
   it("HTTP 429 on the whole batch (after retries) leaves every address unread and does not throw", async () => {
-    globalThis.fetch = (async () => new Response("Too Many Requests", { status: 429 })) as typeof fetch;
+    globalThis.fetch = (async () =>
+      new Response("Too Many Requests", { status: 429 })) as typeof fetch;
     const out = await readMultipliers([addr(1), addr(2)]);
     assert.equal(out.size, 2);
     for (const row of out.values()) {
@@ -396,9 +399,15 @@ describe("readTapeRaw", () => {
   });
 
   it("is absent with the RPC's silence as the reason once retries are spent", async () => {
-    globalThis.fetch = (async () => new Response("Too Many Requests", { status: 429 })) as typeof fetch;
+    globalThis.fetch = (async () =>
+      new Response("Too Many Requests", { status: 429 })) as typeof fetch;
     const tape = await readTapeRaw();
-    assert.deepEqual(tape, { chainId: null, block: null, absent: true, reason: "RPC did not answer." });
+    assert.deepEqual(tape, {
+      chainId: null,
+      block: null,
+      absent: true,
+      reason: "RPC did not answer.",
+    });
   });
 });
 

@@ -19,7 +19,9 @@ let readAt = null;
 try {
   readAt = JSON.parse(readFileSync(metaPath, "utf8")).readAt ?? null;
 } catch (err) {
-  console.log(`WARNING: data/snapshot/meta.json could not be read (${err?.message ?? err}) — ${HINT}`);
+  console.log(
+    `WARNING: data/snapshot/meta.json could not be read (${err?.message ?? err}) — ${HINT}`,
+  );
   process.exit(0);
 }
 

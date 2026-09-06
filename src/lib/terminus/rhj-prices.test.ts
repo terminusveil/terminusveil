@@ -10,7 +10,11 @@ import {
 } from "./rhj-prices.ts";
 
 function quoteBody(ticker: string) {
-  return { quotes: [{ tokenSymbol: ticker, bid: "1.00", ask: "1.01", isTradingHalt: false, generatedAt: "t" }] };
+  return {
+    quotes: [
+      { tokenSymbol: ticker, bid: "1.00", ask: "1.01", isTradingHalt: false, generatedAt: "t" },
+    ],
+  };
 }
 
 /**
@@ -146,6 +150,12 @@ describe("createPriceFeed · 429 back-off", () => {
 
 describe("parseQuote", () => {
   it("returns an empty quote when the endpoint did not answer", () => {
-    assert.deepEqual(parseQuote("AAPL", null), { ticker: "AAPL", bid: null, ask: null, halt: false, at: null });
+    assert.deepEqual(parseQuote("AAPL", null), {
+      ticker: "AAPL",
+      bid: null,
+      ask: null,
+      halt: false,
+      at: null,
+    });
   });
 });

@@ -1,13 +1,7 @@
 import { cn } from "@/lib/utils";
 
 /** Didone V whose cross-stroke is the covering. */
-export function MarkGlyph({
-  tile = false,
-  mono = false,
-}: {
-  tile?: boolean;
-  mono?: boolean;
-}) {
+export function MarkGlyph({ tile = false, mono = false }: { tile?: boolean; mono?: boolean }) {
   const v = tile ? "#EEF2E4" : "currentColor";
   const veil = tile || !mono ? "#C8F033" : "currentColor";
   return (
@@ -34,14 +28,7 @@ export function MarkGlyph({
           fill={v}
           d="M38.2 6.9h17.3l-1.4 4.35-6.55 3.35L23.4 52.1l-2.7-1.05L43.7 14.6 39.8 11.25Z"
         />
-        <rect
-          className="mark-veil"
-          x="22.1"
-          y="27.9"
-          width="26.2"
-          height="4.1"
-          fill={veil}
-        />
+        <rect className="mark-veil" x="22.1" y="27.9" width="26.2" height="4.1" fill={veil} />
       </g>
     </>
   );

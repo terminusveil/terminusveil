@@ -71,8 +71,16 @@ describe("latestCompleted", () => {
   });
 
   it("dates an action by its process date when it has no terminus", () => {
-    const dated = action({ ticker: "OLD", terminusIso: null, processDate: { year: 2026, month: 7, day: 1 } });
-    const later = action({ ticker: "NEW", terminusIso: null, processDate: { year: 2026, month: 8, day: 20 } });
+    const dated = action({
+      ticker: "OLD",
+      terminusIso: null,
+      processDate: { year: 2026, month: 7, day: 1 },
+    });
+    const later = action({
+      ticker: "NEW",
+      terminusIso: null,
+      processDate: { year: 2026, month: 8, day: 20 },
+    });
     assert.equal(latestCompleted([dated, later])?.ticker, "NEW");
   });
 });

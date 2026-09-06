@@ -43,7 +43,9 @@ describe("VeilPass", function () {
     const rest = PRICE - burned;
     const tx = await pass.connect(buyer).buy();
     const at = BigInt(await time.latest());
-    await expect(tx).to.emit(pass, "Bought").withArgs(buyer.address, buyer.address, PRICE, burned, at + PERIOD);
+    await expect(tx)
+      .to.emit(pass, "Bought")
+      .withArgs(buyer.address, buyer.address, PRICE, burned, at + PERIOD);
     expect(await veil.balanceOf(DEAD)).to.equal(burned);
     expect(await veil.balanceOf(house.address)).to.equal(rest);
     expect(await veil.balanceOf(await pass.getAddress())).to.equal(0n);
@@ -77,7 +79,9 @@ describe("VeilPass", function () {
     expect(await veil.balanceOf(buyer.address)).to.equal(before - PRICE);
     expect(await pass.isActive(other.address)).to.equal(true);
     expect(await pass.isActive(buyer.address)).to.equal(false);
-    await expect(pass.connect(buyer).buyFor(ethers.ZeroAddress)).to.be.revertedWith("VeilPass: wallet");
+    await expect(pass.connect(buyer).buyFor(ethers.ZeroAddress)).to.be.revertedWith(
+      "VeilPass: wallet",
+    );
   });
 
   it("isActive flips at the boundary", async function () {
@@ -94,9 +98,13 @@ describe("VeilPass", function () {
     const { pass, setter, other } = await deploy();
     await expect(pass.connect(other).setPrice(1n)).to.be.revertedWith("VeilPass: setter");
     await expect(pass.connect(setter).setPrice(0n)).to.be.revertedWith("VeilPass: price");
-    await expect(pass.connect(setter).setPrice(2n * ONE)).to.emit(pass, "PriceSet").withArgs(2n * ONE);
+    await expect(pass.connect(setter).setPrice(2n * ONE))
+      .to.emit(pass, "PriceSet")
+      .withArgs(2n * ONE);
     expect(await pass.price()).to.equal(2n * ONE);
-    await expect(pass.connect(setter).handPriceSetter(ethers.ZeroAddress)).to.be.revertedWith("VeilPass: setter");
+    await expect(pass.connect(setter).handPriceSetter(ethers.ZeroAddress)).to.be.revertedWith(
+      "VeilPass: setter",
+    );
     await expect(pass.connect(setter).handPriceSetter(other.address))
       .to.emit(pass, "PriceSetterHanded")
       .withArgs(other.address);
@@ -143,13 +151,9 @@ describe("VeilPass", function () {
   it("a token that calls back into buy cannot open two periods for one price", async function () {
     const [, house, setter, buyer] = await ethers.getSigners();
     const veil = await (await ethers.getContractFactory("MockReentrantVeil")).deploy();
-    const pass = await (await ethers.getContractFactory("VeilPass")).deploy(
-      await veil.getAddress(),
-      house.address,
-      BURN_BPS,
-      PRICE,
-      setter.address,
-    );
+    const pass = await (
+      await ethers.getContractFactory("VeilPass")
+    ).deploy(await veil.getAddress(), house.address, BURN_BPS, PRICE, setter.address);
     await veil.setPass(await pass.getAddress());
     await veil.transfer(buyer.address, 10_000n * ONE);
     await veil.connect(buyer).approve(await pass.getAddress(), 10_000n * ONE);
@@ -171,11 +175,23 @@ describe("VeilPass", function () {
     const veil = await (await ethers.getContractFactory("MockVeil")).deploy();
     const Pass = await ethers.getContractFactory("VeilPass");
     const v = await veil.getAddress();
-    await expect(Pass.deploy(ethers.ZeroAddress, house.address, BURN_BPS, PRICE, setter.address)).to.be.revertedWith("VeilPass: veil");
-    await expect(Pass.deploy(v, ethers.ZeroAddress, BURN_BPS, PRICE, setter.address)).to.be.revertedWith("VeilPass: house");
-    await expect(Pass.deploy(v, house.address, 0, PRICE, setter.address)).to.be.revertedWith("VeilPass: burnBps");
-    await expect(Pass.deploy(v, house.address, 10_001, PRICE, setter.address)).to.be.revertedWith("VeilPass: burnBps");
-    await expect(Pass.deploy(v, house.address, BURN_BPS, 0n, setter.address)).to.be.revertedWith("VeilPass: price");
-    await expect(Pass.deploy(v, house.address, BURN_BPS, PRICE, ethers.ZeroAddress)).to.be.revertedWith("VeilPass: setter");
+    await expect(
+      Pass.deploy(ethers.ZeroAddress, house.address, BURN_BPS, PRICE, setter.address),
+    ).to.be.revertedWith("VeilPass: veil");
+    await expect(
+      Pass.deploy(v, ethers.ZeroAddress, BURN_BPS, PRICE, setter.address),
+    ).to.be.revertedWith("VeilPass: house");
+    await expect(Pass.deploy(v, house.address, 0, PRICE, setter.address)).to.be.revertedWith(
+      "VeilPass: burnBps",
+    );
+    await expect(Pass.deploy(v, house.address, 10_001, PRICE, setter.address)).to.be.revertedWith(
+      "VeilPass: burnBps",
+    );
+    await expect(Pass.deploy(v, house.address, BURN_BPS, 0n, setter.address)).to.be.revertedWith(
+      "VeilPass: price",
+    );
+    await expect(
+      Pass.deploy(v, house.address, BURN_BPS, PRICE, ethers.ZeroAddress),
+    ).to.be.revertedWith("VeilPass: setter");
   });
 });

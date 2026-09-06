@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://terminusveil.app/sitemap.xml
+Sitemap: https://www.terminusveil.app/sitemap.xml

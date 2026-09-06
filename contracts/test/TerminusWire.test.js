@@ -80,12 +80,20 @@ describe("TerminusWire", function () {
   it("postMany rejects empty input, a length mismatch and more than MAX_BATCH", async function () {
     const { wire } = await deploy();
     await expect(wire.postMany([], [], [])).to.be.revertedWith("TerminusWire: empty");
-    await expect(wire.postMany([T("A")], [ONE, ONE], [0n])).to.be.revertedWith("TerminusWire: length");
-    await expect(wire.postMany([T("A")], [ONE], [0n, 0n])).to.be.revertedWith("TerminusWire: length");
+    await expect(wire.postMany([T("A")], [ONE, ONE], [0n])).to.be.revertedWith(
+      "TerminusWire: length",
+    );
+    await expect(wire.postMany([T("A")], [ONE], [0n, 0n])).to.be.revertedWith(
+      "TerminusWire: length",
+    );
     const n = Number(await wire.MAX_BATCH()) + 1;
     const tickers = Array.from({ length: n }, (_, i) => T(`T${i}`));
     await expect(
-      wire.postMany(tickers, tickers.map(() => ONE), tickers.map(() => 0n)),
+      wire.postMany(
+        tickers,
+        tickers.map(() => ONE),
+        tickers.map(() => 0n),
+      ),
     ).to.be.revertedWith("TerminusWire: batch");
   });
 

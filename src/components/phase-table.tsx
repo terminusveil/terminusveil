@@ -38,10 +38,18 @@ export function PhaseTable({ phases = PHASES }: { phases?: readonly Phase[] }) {
       <table className="hidden w-full border-collapse text-sm sm:table">
         <thead>
           <tr className="border-b border-line text-left">
-            <th scope="col" className="kicker-muted py-3 pr-4 font-medium">Phase</th>
-            <th scope="col" className="kicker-muted py-3 pr-4 font-medium">Status</th>
-            <th scope="col" className="kicker-muted py-3 pr-4 font-medium">What</th>
-            <th scope="col" className="kicker-muted py-3 font-medium">Who</th>
+            <th scope="col" className="kicker-muted py-3 pr-4 font-medium">
+              Phase
+            </th>
+            <th scope="col" className="kicker-muted py-3 pr-4 font-medium">
+              Status
+            </th>
+            <th scope="col" className="kicker-muted py-3 pr-4 font-medium">
+              What
+            </th>
+            <th scope="col" className="kicker-muted py-3 font-medium">
+              Who
+            </th>
           </tr>
         </thead>
         <tbody className="divide-y divide-line">

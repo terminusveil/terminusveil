@@ -19,7 +19,12 @@ export function Glossary({
 
   if (compact) {
     return (
-      <ul className={cn("flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs leading-relaxed", className)}>
+      <ul
+        className={cn(
+          "flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs leading-relaxed",
+          className,
+        )}
+      >
         {entries.map((e) => (
           <li key={e.term}>
             <span className="text-accent">{e.term}</span>

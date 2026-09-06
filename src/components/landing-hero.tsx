@@ -13,7 +13,9 @@ import type { DeskPayload, TickerRow } from "@/lib/terminus/types";
 
 /** Spec §5.1: the kicker is a status. */
 function heroKicker(source: DeskPayload["source"]): string {
-  return source === "live" ? "Reading Robinhood Chain · live" : "Reading Robinhood Chain · snapshot";
+  return source === "live"
+    ? "Reading Robinhood Chain · live"
+    : "Reading Robinhood Chain · snapshot";
 }
 /** Spec §5.2: the deck is the category sentence. */
 const DECK =
@@ -25,7 +27,8 @@ const HERO_COPY_LABELS = { idle: "copy", done: "copied", failed: "copy failed" }
 
 /** `$VEIL · live on pons · CA 0x1234…abcd · copy` — the link still opens /token; `copy` copies the full CA. */
 function LiveHouseLine({ address }: { address: `0x${string}` }) {
-  const control = "inline-flex min-h-11 items-baseline transition-[color] duration-150 hover:text-accent";
+  const control =
+    "inline-flex min-h-11 items-baseline transition-[color] duration-150 hover:text-accent";
   return (
     <p className="mt-2 flex flex-wrap items-center gap-x-2 font-mono text-sm text-ink-muted">
       <Link to="/token" className={control}>
@@ -129,7 +132,9 @@ export function LandingHero({
           </p>
           <h1 className="mt-6 max-w-xl font-display text-2xl leading-snug tracking-tight text-ink sm:text-3xl">
             <span className="block italic">The name is public.</span>
-            <span className="mt-2 block text-ink-muted">The next action is veiled until terminus.</span>
+            <span className="mt-2 block text-ink-muted">
+              The next action is veiled until terminus.
+            </span>
           </h1>
         </header>
 
@@ -143,7 +148,9 @@ export function LandingHero({
               className="mt-5 inline-flex min-h-11 items-baseline font-mono text-sm text-ink-muted transition-[color] duration-150 hover:text-accent"
             >
               <span className="text-accent">{HOUSE.display}</span>
-              <span className="whitespace-pre-wrap text-pretty">{VEIL_LINE.slice(HOUSE.display.length)}</span>
+              <span className="whitespace-pre-wrap text-pretty">
+                {VEIL_LINE.slice(HOUSE.display.length)}
+              </span>
             </Link>
           )}
           <SnapshotNote desk={desk} className="mt-6" />

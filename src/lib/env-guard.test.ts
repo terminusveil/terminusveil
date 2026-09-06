@@ -36,7 +36,10 @@ function entries(src: string): { key: string; value: string; line: number }[] {
 
 describe("the tracked .env", () => {
   it("exists and is readable, so this guard is not vacuous", () => {
-    assert.ok(existsSync(ENV), ".env is tracked and the README relies on it");
+    assert.ok(
+      existsSync(ENV),
+      ".env is tracked and carries the public origin; if you copied .env.example over it, `git checkout .env` and use .env.local",
+    );
     assert.ok(entries(readFileSync(ENV, "utf8")).length > 0, ".env holds no key at all");
   });
 

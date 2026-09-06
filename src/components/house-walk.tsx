@@ -40,8 +40,12 @@ export function HouseWalk() {
               >
                 <p className="font-display text-3xl leading-none text-accent">{s.n}</p>
                 <div className="max-w-xl">
-                  <h3 className="font-sans text-lg font-semibold tracking-tight text-ink">{s.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-pretty text-ink-muted">{s.body}</p>
+                  <h3 className="font-sans text-lg font-semibold tracking-tight text-ink">
+                    {s.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-pretty text-ink-muted">
+                    {s.body}
+                  </p>
                   <Link
                     to={s.to}
                     search={"search" in s ? s.search : undefined}

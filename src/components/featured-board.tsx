@@ -10,7 +10,10 @@ import { pendingPlates, rowFor, type DeskPayload, type TickerRow } from "@/lib/t
  */
 export function FeaturedBoard({ desk }: { desk: DeskPayload }) {
   const seen = new Set<string>();
-  const order = [...FEATURED_TICKERS, ...pendingPlates(desk.rows, 6, desk.clockMs).map((r) => r.ticker)];
+  const order = [
+    ...FEATURED_TICKERS,
+    ...pendingPlates(desk.rows, 6, desk.clockMs).map((r) => r.ticker),
+  ];
   const rows: TickerRow[] = [];
   for (const t of order) {
     if (seen.has(t)) continue;

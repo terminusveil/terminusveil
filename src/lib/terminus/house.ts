@@ -46,7 +46,7 @@ export type House = {
   /** The quote asset's symbol as pons shows it (e.g. "ETH"); null until pasted. */
   pairAsset: string | null;
   links: HouseLinksShape;
-  /** Phase 1, the Wire. Two facts, pasted together (README, "The Wire"). */
+  /** Phase 1, the Wire. Two facts, pasted together (ARCHITECTURE.md, section 5). */
   wire: HouseWire;
   /** Phase 2, the Pass. One fact, pasted with the Key. */
   pass: HousePass;

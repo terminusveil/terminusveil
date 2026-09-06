@@ -62,4 +62,4 @@ PRIVATE_KEY=0x… npm run deploy:robinhood                 # TerminusWire
 npm run verify:robinhood -- <address>
 ```
 
-Then paste `wire.address` (the contract) and `wire.poster` (the poster wallet the site's job signs with; see the site README, "The Wire") into `src/lib/terminus/house.ts`, together. Until both are pasted the site says `next`, which stays true.
+`wire.address` (the contract) and `wire.poster` (the wallet whose key is `WIRE_POSTER_KEY` in the host's environment; ARCHITECTURE.md, section 5) are pasted together into `src/lib/terminus/house.ts`. Both are pasted today. A new poster is a paste of the second fact.

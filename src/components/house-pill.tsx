@@ -65,7 +65,11 @@ export function HousePill({
     );
   }
   return (
-    <Link to="/token" className={classes} aria-label={`${HOUSE.display} token page. ${houseStamp()}.`}>
+    <Link
+      to="/token"
+      className={classes}
+      aria-label={`${HOUSE.display} token page. ${houseStamp()}.`}
+    >
       {dot}
       {text}
     </Link>

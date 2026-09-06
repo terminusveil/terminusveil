@@ -87,9 +87,7 @@ function parseAction(a: RhjAction): CorporateAction | null {
       : "other";
   const pd = a.processDate;
   const processDate =
-    pd?.year && pd?.month && pd?.day
-      ? { year: pd.year, month: pd.month, day: pd.day }
-      : null;
+    pd?.year && pd?.month && pd?.day ? { year: pd.year, month: pd.month, day: pd.day } : null;
   const first = actionDetails(a);
   const terminusIso = processDate ? terminusFromProcessDate(processDate).toISOString() : null;
   return {
@@ -180,8 +178,10 @@ export function createRhjFeed(deps: { now?: () => number; getJson?: Loader } = {
 
   /** What the caches can honestly serve at `t`. */
   function served(t: number): RhjSnapshot {
-    const assets = assetsCache !== null && t - assetsCache.at < ASSETS_MAX_STALE_MS ? assetsCache : null;
-    const actions = actionsCache !== null && t - actionsCache.at < ACTIONS_MAX_STALE_MS ? actionsCache : null;
+    const assets =
+      assetsCache !== null && t - assetsCache.at < ASSETS_MAX_STALE_MS ? assetsCache : null;
+    const actions =
+      actionsCache !== null && t - actionsCache.at < ACTIONS_MAX_STALE_MS ? actionsCache : null;
     return {
       assets: assets?.data ?? [],
       actions: actions?.data ?? [],
@@ -218,7 +218,10 @@ export function createRhjFeed(deps: { now?: () => number; getJson?: Loader } = {
     }
     if (failed) {
       retryAfter = t + RETRY_MS;
-      warnOnce(retryWarnGate, RETRY_MS, t, "[rhj] retry window entered", { needAssets, needActions });
+      warnOnce(retryWarnGate, RETRY_MS, t, "[rhj] retry window entered", {
+        needAssets,
+        needActions,
+      });
     }
     return served(t);
   }

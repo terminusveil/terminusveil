@@ -63,7 +63,11 @@ export function coveringFromRow(row: TickerRow): Covering {
   };
 }
 
-export function coveringLife(item: Covering, row: TickerRow | null, now = Date.now()): CoveringLife {
+export function coveringLife(
+  item: Covering,
+  row: TickerRow | null,
+  now = Date.now(),
+): CoveringLife {
   const terminusMs = item.terminusIso ? Date.parse(item.terminusIso) : Number.NaN;
   if (Number.isFinite(terminusMs) && terminusMs > now) return "sealed";
   if (row?.state === "open" && !row.action && !row.staged) return "opened";

@@ -14,9 +14,9 @@ Every refresh gathers, in this order:
 
 | Source | What | Where in code |
 |---|---|---|
-| Tape | `eth_chainId` and `eth_blockNumber`, the proof the chain answered | `relay-live.ts` `readTape` |
+| Tape | `eth_chainId` and `eth_blockNumber`, the proof the chain answered | `relay-live.ts` `readTapeRaw`, memoised by `createTapeReader` |
 | Issuer feed | Robinhood's public corporate-actions and assets feeds: the names, their contract addresses, pending actions with process dates, the issuer's own multiplier figures | `rhj.ts` |
-| Contract reads | For every asset, five `eth_call`s: `uiMultiplier`, `newUIMultiplier`, `effectiveAt`, `oraclePaused`, `paused`. All of them ride Multicall3 `aggregate3`, 250 sub-calls per call, so a full desk is a handful of requests | `relay-live.ts` `readMultipliers`, `multicall.ts` |
+| Contract reads | For every asset, the four reads `uiMultiplier`, `newUIMultiplier`, `effectiveAt`, `oraclePaused`, plus `paused` for the transfer pause: five `eth_call`s. All of them ride Multicall3 `aggregate3`, 250 sub-calls per call, so a full desk is a handful of requests | `relay-live.ts` `readMultipliers`, `multicall.ts` |
 | Last move | The latest `UIMultiplierUpdated` log per contract, for due names only, inside a bounded block window | `relay-live.ts` `readLastMoves`, `last-move.ts` |
 | Wire | The house poster's latest post per name, the post count and the poster's balance | `relay-live.ts` `readWire`, `readWireStatus` |
 | Windows | A committed index of pons launches and Uniswap v4 pools per name, plus a bounded live delta past the index | `windows.ts`, `windows-read.ts`, `data/windows/index.json` |
@@ -39,7 +39,7 @@ Each name resolves to one state (`multiplier.ts` `resolveState`):
 | `absent` | no contract read and no live figure and no pending action |
 | `paused` | `oraclePaused()` read true |
 | `veiled` | a staged figure differs from the live one, or an action is pending, and terminus is ahead (or unknown) |
-| `due` | terminus has passed and no move has been read yet |
+| `due` | terminus has passed and the issuer still lists the action, or a staged figure is still there past its `effectiveAt` |
 | `open` | nothing staged, nothing pending |
 
 Terminus is taken in this order: the issuer's `pendingMultiplierEffectiveTime`; else the contract's `effectiveAt` when it is in the future; else the issuer's `processDate` at 09:30 America/New_York, the cash-session open. The third is an assumption and the plate marks it `assumed`. The desk never guesses a figure.
@@ -61,6 +61,7 @@ A crawl (`scripts/windows.mjs`) reads the pons Factory's `TokenLaunched` events,
 | `/api/health` | the build, the chain block and read time, the source, counts, the Wire's address and count |
 | `/api/pending` | every pending name as a row |
 | `/api/ticker/{ticker}` | one row, with `wire`, `wireRead`, `windows`, `transferPaused` |
+| `/api/desk` | the whole desk payload the pages render from |
 | `/api/tape` | the chain id and block |
 | `/api/calendar` | the pending actions as ICS |
 | `/api/openapi.json` | the schema of all of the above |

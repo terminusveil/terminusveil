@@ -41,7 +41,6 @@ export default defineConfig(({ command, isPreview }) => ({
     __BUILD_AT__: JSON.stringify(new Date().toISOString()),
   },
   server: {
-    host: "0.0.0.0",
     port: 8080,
     strictPort: true,
   },
@@ -67,8 +66,8 @@ export default defineConfig(({ command, isPreview }) => ({
             // function this preset builds.
             vercel: {
               functions: { maxDuration: 60 },
-              // Vercel Cron, the daily floor a Hobby project allows; the owner's
-              // external pinger (README, "The Wire") gives the sharper cadence.
+              // Vercel Cron, the daily floor; the desk's own half-hourly posting
+              // from inside its refresh (ARCHITECTURE.md, section 5) is the sharper cadence.
               config: { crons: [{ path: "/api/wire/post", schedule: "0 12 * * *" }] },
             },
           }),

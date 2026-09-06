@@ -25,7 +25,12 @@ export function HouseLinks({ className, pills = false }: { className?: string; p
     <ul className={cn("flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs", className)}>
       {links.map((l) => (
         <li key={l.href}>
-          <a href={l.href} target="_blank" rel="noreferrer" className="text-ink-subtle hover:text-accent">
+          <a
+            href={l.href}
+            target="_blank"
+            rel="noreferrer"
+            className="text-ink-subtle hover:text-accent"
+          >
             {l.label} ↗
           </a>
         </li>

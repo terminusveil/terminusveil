@@ -23,7 +23,9 @@ export function DocSection({
       <h2
         className={cn(
           "tracking-tight text-ink",
-          rule ? "font-display text-xl font-normal sm:text-2xl" : "font-display text-lg font-semibold",
+          rule
+            ? "font-display text-xl font-normal sm:text-2xl"
+            : "font-display text-lg font-semibold",
         )}
       >
         {title}
@@ -35,7 +37,12 @@ export function DocSection({
 
 export function DocP({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <p className={cn("mt-3 text-sm leading-relaxed text-pretty text-ink-muted sm:text-base", className)}>
+    <p
+      className={cn(
+        "mt-3 text-sm leading-relaxed text-pretty text-ink-muted sm:text-base",
+        className,
+      )}
+    >
       {children}
     </p>
   );
@@ -56,7 +63,10 @@ export function Ext({
       href={href}
       target="_blank"
       rel="noreferrer"
-      className={cn("text-ink underline decoration-line underline-offset-4 hover:text-accent", className)}
+      className={cn(
+        "text-ink underline decoration-line underline-offset-4 hover:text-accent",
+        className,
+      )}
     >
       {children}
     </a>

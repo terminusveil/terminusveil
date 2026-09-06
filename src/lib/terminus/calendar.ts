@@ -189,7 +189,11 @@ export function monthLabel(year: number, month: number, style: "long" | "short" 
   }).format(d);
 }
 
-export function shiftMonth(year: number, month: number, delta: number): { year: number; month: number } {
+export function shiftMonth(
+  year: number,
+  month: number,
+  delta: number,
+): { year: number; month: number } {
   const d = new Date(year, month - 1 + delta, 1);
   return { year: d.getFullYear(), month: d.getMonth() + 1 };
 }

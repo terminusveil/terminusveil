@@ -5,7 +5,11 @@ import { formatMultiplier } from "@/lib/terminus/format";
 import type { DeskPayload } from "@/lib/terminus/types";
 import { cn } from "@/lib/utils";
 
-type Shortcut = { to: "/" | "/events" | "/token" | "/docs" | "/cover" | "/status"; label: string; hint: string };
+type Shortcut = {
+  to: "/" | "/events" | "/token" | "/docs" | "/cover" | "/status";
+  label: string;
+  hint: string;
+};
 
 const SHORTCUTS: Shortcut[] = [
   { to: "/", label: "Home", hint: "plate" },

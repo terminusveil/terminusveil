@@ -19,7 +19,11 @@ function icsUtc(iso: string): string {
 }
 
 function escapeIcs(s: string): string {
-  return s.replaceAll("\\", "\\\\").replaceAll(";", "\\;").replaceAll(",", "\\,").replaceAll("\n", "\\n");
+  return s
+    .replaceAll("\\", "\\\\")
+    .replaceAll(";", "\\;")
+    .replaceAll(",", "\\,")
+    .replaceAll("\n", "\\n");
 }
 
 export function coveringAsAction(row: TickerRow): CorporateAction | null {
@@ -65,7 +69,11 @@ function terminusAssumed(a: CorporateAction, row: TickerRow | undefined): boolea
 
 /** DTSTART: the published time when the row's source is the issuer or the chain; else the action's own terminus. */
 function eventStartIso(a: CorporateAction, row: TickerRow | undefined): string | null {
-  if (row && (row.terminusSource === "issuer" || row.terminusSource === "chain") && row.effectiveAtIso) {
+  if (
+    row &&
+    (row.terminusSource === "issuer" || row.terminusSource === "chain") &&
+    row.effectiveAtIso
+  ) {
     return row.effectiveAtIso;
   }
   return a.terminusIso;

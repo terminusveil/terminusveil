@@ -21,7 +21,12 @@ describe("stripTiles", () => {
   });
 
   it("prints zero as zero and marks it, and dashes a missing block without a link", () => {
-    const tiles = stripTiles({ assetCount: 3, pendingCount: 0, dueCount: 0, tape: { ...tape, block: null } });
+    const tiles = stripTiles({
+      assetCount: 3,
+      pendingCount: 0,
+      dueCount: 0,
+      tape: { ...tape, block: null },
+    });
     assert.equal(tiles?.[1]?.value, "0");
     assert.equal(tiles?.[1]?.zero, true);
     assert.equal(tiles?.[2]?.value, "0");

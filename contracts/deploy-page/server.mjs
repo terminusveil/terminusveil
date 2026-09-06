@@ -41,7 +41,10 @@ createServer((req, res) => {
   const url = new URL(req.url ?? "/", `http://localhost:${PORT}`);
   try {
     if (url.pathname === "/") {
-      res.writeHead(200, { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" });
+      res.writeHead(200, {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "no-store",
+      });
       res.end(readFileSync(join(here, "index.html"), "utf8"));
       return;
     }

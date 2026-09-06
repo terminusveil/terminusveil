@@ -16,7 +16,8 @@ function passArgs() {
   const missing = need.filter((k) => !env[k]);
   if (missing.length) throw new Error(`VeilPass needs ${missing.join(", ")}`);
   const bps = Number(env.BURN_BPS);
-  if (!Number.isInteger(bps) || bps < 1 || bps > 10_000) throw new Error("BURN_BPS must be 1..10000");
+  if (!Number.isInteger(bps) || bps < 1 || bps > 10_000)
+    throw new Error("BURN_BPS must be 1..10000");
   return [env.VEIL, env.HOUSE_WALLET, bps, BigInt(env.PRICE_WEI), env.PRICE_SETTER];
 }
 
@@ -26,7 +27,9 @@ async function main() {
   const [deployer] = await ethers.getSigners();
   if (!deployer) throw new Error("PRIVATE_KEY is not set; nothing deployed");
   const balance = await ethers.provider.getBalance(deployer.address);
-  console.log(`network ${network.name} · deployer ${deployer.address} · balance ${ethers.formatEther(balance)} ETH`);
+  console.log(
+    `network ${network.name} · deployer ${deployer.address} · balance ${ethers.formatEther(balance)} ETH`,
+  );
 
   const args = name === "VeilPass" ? passArgs() : [];
   const Factory = await ethers.getContractFactory(name);
@@ -36,7 +39,9 @@ async function main() {
   const receipt = await contract.deploymentTransaction().wait();
 
   console.log(`${name} ${address} · block ${receipt.blockNumber} · tx ${receipt.hash}`);
-  console.log(`verify: npx hardhat verify --network robinhood ${address}${args.map((a) => ` ${a}`).join("")}`);
+  console.log(
+    `verify: npx hardhat verify --network robinhood ${address}${args.map((a) => ` ${a}`).join("")}`,
+  );
   console.log(`explorer: https://robinhoodchain.blockscout.com/address/${address}`);
 }
 

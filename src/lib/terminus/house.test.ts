@@ -163,7 +163,7 @@ describe("pasted facts", () => {
     if (HOUSE.pairAsset !== null) assert.match(HOUSE.pairAsset, /^[A-Z0-9.-]{1,12}$/, "pairAsset");
   });
 
-  it("the five creation facts are pasted together or not at all (runbook step 1)", () => {
+  it("the five creation facts are pasted together or not at all", () => {
     const set = [
       HOUSE.address,
       HOUSE.links.pons,
@@ -177,7 +177,7 @@ describe("pasted facts", () => {
     );
   });
 
-  it("the two Wire facts are pasted together or not at all (README, The Wire, step 4)", () => {
+  it("the two Wire facts are pasted together or not at all", () => {
     const set = [HOUSE.wire.address, HOUSE.wire.poster].filter((v) => v !== null).length;
     assert.ok(
       set === 0 || set === 2,
