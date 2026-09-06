@@ -1,3 +1,5 @@
+import { fileURLToPath } from "node:url";
+import { includeIgnoreFile } from "@eslint/compat";
 import js from "@eslint/js";
 import prettier from "eslint-config-prettier";
 import reactHooks from "eslint-plugin-react-hooks";
@@ -7,14 +9,14 @@ import tseslint from "typescript-eslint";
 
 /** Flat ESLint config. */
 export default tseslint.config(
+  // Everything .gitignore hides from git is hidden from the linter too.
+  includeIgnoreFile(fileURLToPath(new URL(".gitignore", import.meta.url))),
   {
     ignores: [
       "dist/**",
       ".output/**",
       ".vercel/**",
       ".nitro/**",
-      ".superpowers/**",
-      ".impeccable/**",
       "contracts/**",
       "node_modules/**",
       "src/routeTree.gen.ts",
