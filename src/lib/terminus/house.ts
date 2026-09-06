@@ -81,13 +81,13 @@ export const HOUSE: House = {
   display: "$VEIL",
   name: "Terminus Veil",
   chainId: 4663,
-  address: null,
-  feeWallet: null,
-  supply: null,
-  pairAsset: null,
+  address: "0x375Bd7a9f92D0321869298B2c993d6E374348111",
+  feeWallet: "0x1BA3cC26595F39347d011b67D90cF1Dd67724D70",
+  supply: "1000000000",
+  pairAsset: "ETH",
   links: {
     x: "https://x.com/terminus_veil",
-    pons: null,
+    pons: "https://www.ponsfamily.com/launchpad/0x375bd7a9f92d0321869298b2c993d6e374348111",
     pair: null,
   },
   wire: {
