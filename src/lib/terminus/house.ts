@@ -73,6 +73,9 @@ export type House = {
  * The owner's create-form settings (creator tax, holder fee sharing, buyback)
  * live outside the repo, in docs/launch/; the site never prints them.
  */
+/** The public mirror of the working repository: snapshots, authored by the house, for reading and audit. */
+export const SOURCE_URL = "https://github.com/terminusveil/terminusveil";
+
 export const HOUSE: House = {
   symbol: "VEIL",
   display: "$VEIL",

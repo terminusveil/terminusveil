@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Wordmark } from "@/components/wordmark";
-import { HOUSE, houseLaunched } from "@/lib/terminus/house";
+import { HOUSE, SOURCE_URL, houseLaunched } from "@/lib/terminus/house";
 
 /** Deck `claim.primaryCta` / `claim.ghostCta`. Launched: `Open on pons` (existing rule). */
 const CLAIM_PRIMARY_CTA = "See what holders get";
@@ -39,6 +39,7 @@ const FOOTER_LINKS: { to: InternalTo; label: string }[] = [
 export function SiteFooter({ claim = true }: { claim?: boolean }) {
   const social: ExternalLink[] = [];
   if (HOUSE.links.x) social.push({ href: HOUSE.links.x, label: "X" });
+  social.push({ href: SOURCE_URL, label: "GitHub" });
   const launched = houseLaunched();
   const pons = HOUSE.links.pons;
 

@@ -20,11 +20,9 @@ import {
   houseLaunched,
   wireExplorerUrl,
   wireFacts,
+  SOURCE_URL,
 } from "@/lib/terminus/house";
 import { PONS_FACTORY, UNISWAP_V4_POOL_MANAGER } from "@/lib/terminus/windows";
-
-/** The public mirror of this repository: snapshots, authored by the house, for reading and audit. */
-const SOURCE_URL = "https://github.com/terminusveil/terminusveil";
 
 const TOC = [
   { id: "what", label: "What this is" },
