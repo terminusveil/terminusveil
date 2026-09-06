@@ -23,6 +23,9 @@ import {
 } from "@/lib/terminus/house";
 import { PONS_FACTORY, UNISWAP_V4_POOL_MANAGER } from "@/lib/terminus/windows";
 
+/** The public mirror of this repository: snapshots, authored by the house, for reading and audit. */
+const SOURCE_URL = "https://github.com/terminusveil/terminusveil";
+
 const TOC = [
   { id: "what", label: "What this is" },
   { id: "glossary", label: "Glossary" },
@@ -99,6 +102,16 @@ function TrustTable() {
       party: "The Wire poster",
       controls:
         "a dedicated wallet the house runs; it can post to the Wire and nothing else. Its address is on this page and on /status. A post cannot be edited or deleted; a new poster is a paste.",
+    },
+    {
+      party: "The source",
+      controls: (
+        <>
+          published at <Ext href={SOURCE_URL}>github.com/terminusveil/terminusveil</Ext> as
+          snapshots of the working repository, for reading and audit. Nothing merges there; every
+          change lands in the working repository first.
+        </>
+      ),
     },
     {
       party: "The Pass",
