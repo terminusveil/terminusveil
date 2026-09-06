@@ -1,0 +1,5 @@
+Contact: https://x.com/terminus_veil
+Expires: 2027-09-05T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://terminusveil.app/.well-known/security.txt
+Policy: https://terminusveil.app/terms

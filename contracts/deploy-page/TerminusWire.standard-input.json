@@ -1,0 +1,29 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/TerminusWire.sol": {
+      "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.28;\n\n/// @title Terminus Wire\n/// @notice The desk's reads, posted on Robinhood Chain. For a ticker: the\n///         staged multiplier and the terminus as the token contract held them\n///         when the post was made, and the time of the post. Anyone may post;\n///         a reader trusts a poster address, not this contract. Phase 1 of the\n///         Terminus Veil desk.\n/// @dev    No owner, no pause, no upgrade, no fee, no ETH. `staged` is the\n///         18-decimal multiplier (1e18 = 1x). `terminus` is a Unix time, 0 when\n///         the token contract has not set one. The desk's assumed times are\n///         never posted.\ncontract TerminusWire {\n    struct Post {\n        uint256 staged;\n        uint64 terminus;\n        uint64 postedAt;\n    }\n\n    uint256 public constant MAX_BATCH = 64;\n\n    event Posted(\n        address indexed by,\n        bytes32 indexed ticker,\n        uint256 staged,\n        uint64 terminus,\n        uint64 postedAt\n    );\n\n    mapping(address => mapping(bytes32 => Post)) private _latest;\n    mapping(address => uint256) private _count;\n\n    /// @notice The latest post an address made for a ticker; all zero when none.\n    function latest(address by, bytes32 ticker) external view returns (Post memory) {\n        return _latest[by][ticker];\n    }\n\n    /// @notice How many posts an address has made, every ticker counted.\n    function count(address by) external view returns (uint256) {\n        return _count[by];\n    }\n\n    /// @notice Post one ticker's staged figure and terminus.\n    /// @param ticker   The token's ticker, right-padded to bytes32 (e.g. \"JNJ\").\n    /// @param staged   The staged multiplier, 18 decimals; must be non-zero.\n    /// @param terminus The moment staged becomes live; 0 when the contract has not set one.\n    function post(bytes32 ticker, uint256 staged, uint64 terminus) external {\n        _post(ticker, staged, terminus);\n    }\n\n    /// @notice Post up to MAX_BATCH tickers in one transaction. All or nothing.\n    function postMany(\n        bytes32[] calldata tickers,\n        uint256[] calldata staged,\n        uint64[] calldata terminus\n    ) external {\n        uint256 n = tickers.length;\n        require(n != 0, \"TerminusWire: empty\");\n        require(n <= MAX_BATCH, \"TerminusWire: batch\");\n        require(staged.length == n && terminus.length == n, \"TerminusWire: length\");\n        for (uint256 i = 0; i < n; i++) {\n            _post(tickers[i], staged[i], terminus[i]);\n        }\n    }\n\n    function _post(bytes32 ticker, uint256 staged, uint64 terminus) private {\n        require(ticker != bytes32(0), \"TerminusWire: ticker\");\n        require(staged != 0, \"TerminusWire: staged\");\n        uint64 now64 = uint64(block.timestamp);\n        _latest[msg.sender][ticker] = Post({staged: staged, terminus: terminus, postedAt: now64});\n        _count[msg.sender] += 1;\n        emit Posted(msg.sender, ticker, staged, terminus, now64);\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "evmVersion": "paris",
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    }
+  }
+}

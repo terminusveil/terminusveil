@@ -1,0 +1,43 @@
+# deps
+node_modules/
+
+# build output
+dist/
+.output/
+.nitro/
+.vercel/
+.tanstack/
+
+# local env & logs
+.env.local
+.env.*.local
+*.log
+brand-src/*.local.html
+.node_modules.lock
+
+# QA artifacts (large PNGs); keep the folder
+screenshots/*
+!screenshots/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+.superpowers/
+
+# local Claude settings; keep only the dev-server definition
+.claude/*
+!.claude/launch.json
+
+# Hardhat build output
+contracts/artifacts/
+contracts/cache/
+
+# Local worktrees (superpowers)
+.worktrees/
+
+# windows crawl progress (resumable; the committed artifact is index.json)
+data/windows/progress.json
+data/windows/*.tmp
+
+# owner-only kits, handoffs and playbooks: never staged, never mirrored
+docs/launch/

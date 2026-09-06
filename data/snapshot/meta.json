@@ -1,0 +1,15 @@
+{
+  "readAt": "2026-09-06T11:20:52.755Z",
+  "chainId": 4663,
+  "block": 55937419,
+  "assets": 194,
+  "actions": 40,
+  "contracts": 194,
+  "prices": 194,
+  "lastMoves": {
+    "contracts": 29,
+    "moves": 2,
+    "fromBlock": 49937419,
+    "toBlock": 55937419
+  }
+}
